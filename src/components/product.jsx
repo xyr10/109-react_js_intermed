@@ -1,16 +1,24 @@
 import "./product.css";
+import { useEffect } from "react";
 import QuantityPicker from './quantitypicker';
+//import the UseEffect and create the hook
 
-function Product() {
+function Product(props) {
+
+    useEffect (function(){
+
+    },[]);
+
     return(
         <div className="product">
 
-            <img src="https://picsum.photos/200/120" alt="picsum" />
-            <h5>Title goes here</h5>
+            <img src={"/images/"+props.data.image} alt="" />
+
+            <h5>{props.data.title}</h5>
 
             <div className="prices">
-                <label>Total</label>
-                <label>Price</label>
+                <label>Total {props.data.price.toFixed(2)}</label>
+                <label>Price {props.data.price.toFixed(2)}</label>
             </div>
             < QuantityPicker />
             <button>Add</button>
@@ -18,7 +26,7 @@ function Product() {
 
 
         </div>
-    );
+    )
 
 }
 
