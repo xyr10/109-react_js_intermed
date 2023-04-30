@@ -1,32 +1,38 @@
 import "./quantitypicker.css";
 import { useState } from "react";
 
-function QuantityPicker() {
+function QuantityPicker(props) {
+  let [quantity, setQuantity] = useState(1);
 
-        let [quantity, setQuantity] = useState(1);
+  function increase() {
+    console.log("button click");
+    //quantity = 100; // Don't assign the value, we use the function setQuantity to determine this, so instead...
+    //setQuantity(100);
+    let val = quantity + 1;
+    setQuantity(val);
+    props.onQuantityChange();
+  }
 
-    function increase (){
-        console.log("button click");
-        //quantity = 100; // Don't assign the value, we use the function setQuantity to determine this, so instead...
-        //setQuantity(100);
-        let val = quantity + 1;
-        setQuantity(val);
-    }
+  function decrease() {
+    if (quantity === 1) return;
+    let val = quantity - 1;
+    setQuantity(val);
+    props.onQuantityChange();
+  }
 
-    function decrease (){
-        if (quantity === 1) return;
-        console.log("button click");
-        let val = quantity - 1;
-        setQuantity(val);
-    }
-    return (
-        <div className="qt-picker">
-            <button onClick={increase}> + </button>
-            <label> {quantity} </label>
-            <button disabled = {quantity === 1} onClick={decrease}> - </button>
-        </div>
-    );
-
+  return (
+    <div className="qt-picker">
+      <button className="btn btn-dark" onClick={increase}>
+        {" "}
+        +{" "}
+      </button>
+      <label> {quantity} </label>
+      <button className="btn btn-dark" onClick={decrease}>
+        {" "}
+        -{" "}
+      </button>
+    </div>
+  );
 }
 
 export default QuantityPicker;

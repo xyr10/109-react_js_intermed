@@ -1,0 +1,33 @@
+
+.admin {
+    padding-top: 20px;
+}
+
+.admin .parent {
+    text-align: center;
+}
+
+.admin #secProducts {
+    flex: 3;
+    text-align: center;
+} {
+    min-height: calc(100vh - 135px);
+}
+
+
+.admin #secCoupons{
+    flex: auto;
+    max-width: 300px;
+}
+
+.admin section {
+    text-align: left;
+    padding: 20px 30px;
+}
+
+.admin section h4 {
+    text-align: center;
+    font-family:'Times New Roman', Times, serif;
+} {
+    min-height: calc(100vh - 135px);
+}

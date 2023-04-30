@@ -1,0 +1,21 @@
+
+
+.about {
+    background: #efefef;
+    padding: 30px;
+}
+
+.about h1 {
+    text-align: center;
+}
+
+.container-fluid {
+    min-height: calc(100vh - 135px);
+}
+
+.page
+{
+    min-height: calc(100vh - 115px);
+    width: calc(100vw - 2px);
+    margin: 0%;
+}
