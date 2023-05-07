@@ -6,34 +6,38 @@ import Catalog from './pages/catalog';
 import About from './pages/about';
 import Home from './pages/home';
 import Admin from './pages/admin';
+import Cart from './pages/cart';
 import ShoppingList from './pages/shoppinglist';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import GlobalState from './state/globalState';
 
 
-
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <NavBar />
+      <GlobalState>
+        <BrowserRouter>
+          <NavBar />
 
-        <div className="container-fluid">
-          <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/catalog' element={<Catalog />} />
-              <Route path='/about' element={<About />} />
-              <Route path='/home' element={<Home />} />
-              <Route path='/admin' element={<Admin />} />
-              <Route path='/shoppinglist' element={<ShoppingList />} />
-          </Routes>
-      </div> 
-    
-      <Footer />
-      </BrowserRouter>
+          <div className="container-fluid">
+            <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/catalog' element={<Catalog />} />
+                <Route path='/about' element={<About />} />
+                <Route path='/home' element={<Home />} />
+                <Route path='/admin' element={<Admin />} />
+                <Route path='/cart' element={<Cart />} />
+                <Route path='/shoppinglist' element={<ShoppingList />} />
+            </Routes>
+        </div> 
+      
+        <Footer />
+        </BrowserRouter>
+      </GlobalState>
     </div>
   );
 }

@@ -1,0 +1,18 @@
+
+
+.shopping-item {
+    border: 1px solid #efefef;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    background-color: yellow;
+}
+
+.shopping-item:hover{
+    border-color: red;
+    cursor: pointer;
+}
+
+.shopping-item h4{
+    flex: 1;
+}

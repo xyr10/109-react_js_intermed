@@ -1,9 +1,11 @@
+import ShoppingListItem from "../components/product";
 import { useState } from "react";
 import "./shoppinglist.css";
 
 const ShoppingList = () => {
   const [wishList, setWishList] = useState({});
   const [allWishList, setAllWishList] = useState([]);
+  const [shoppingListItem, setShoppingListItem] = useState([]);
 
   const handleTextChange = (e) => {
     let value = e.target.value;
@@ -22,6 +24,10 @@ const ShoppingList = () => {
     setAllWishList(copy);
   };
 
+  function handleDelete(wishList) {
+    console.log("deleting", wishList);
+  }
+
   return (
     <div className="page shopping-list">
       <h1>Shopping List</h1>
@@ -35,7 +41,11 @@ const ShoppingList = () => {
 
       <div className="list">
         {allWishList.map((wishList) => (
-          <h5 key={wishList.name}>{wishList.name}</h5>
+          <ShoppingListItem
+            key={wishList.name}
+            data={wishList}
+            onDelete={handleDelete}
+          />
         ))}
       </div>
     </div>
