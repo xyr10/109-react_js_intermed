@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./admin.css";
+import DataService from "../services/dataService";
 
 function Admin() {
   const [product, setProduct] = useState({});
@@ -7,6 +8,25 @@ function Admin() {
 
   const [coupon, setCoupon] = useState({});
   const [allCoupons, setAllCoupons] = useState([]);
+
+  const service = new DataService();
+  useEffect(function () {
+    loadProducts();
+    loadCoupons();
+  }, []);
+
+  async function loadProducts() {
+    let service = new DataService();
+    let prods = await service.getProducts();
+    setAllProducts(prods);
+  }
+
+  async function loadCoupons() {
+    // let service = new DataService();
+    let loadCoupons = await service.getCoupoons();
+
+    setAllCoupons(loadCoupons);
+  }
 
   function handleProductText(e) {
     const text = e.target.value;
@@ -20,12 +40,14 @@ function Admin() {
     setProduct(copy);
   }
 
-  function saveProduct(e) {
-    console.log(product);
+  function saveProduct() {
+    let prodToSave = { ...product };
+    prodToSave.price = parseFloat(prodToSave.price);
+    service.saveProduct(prodToSave);
 
     // create copy, modify the copy, set the copy back
     let copy = [...allProducts];
-    copy.push(product);
+    copy.push(prodToSave);
     setAllProducts(copy);
     //this is used to SAVE all the products in the array
   }
@@ -45,11 +67,32 @@ function Admin() {
   const saveCoupon = () => {
     console.log(coupon);
 
+    let couponToSave = { ...coupon };
+    couponToSave.discount = parseFloat(couponToSave.discount);
+    service.saveCoupon(couponToSave);
+
     // create copy, modify the copy, set the copy back
     let copy = [...allCoupons];
-    copy.push(coupon);
+    copy.push(couponToSave);
     setAllCoupons(copy);
     //this is used to SAVE all the coupons in the array
+  };
+
+  const deleteCoupon = (code) => {
+    // **
+    // call a deleteCoupon function on the service and pass the code
+    // the service should call a DELETE request to /api/coupons/qwerty
+    // on the server create the DELETE endpoint that catches the code from the URL
+    // and use it to delete a record from the database
+    service.deleteCoupon(code);
+
+    let copy = allCoupons.filter((c) => c != code);
+    setAllCoupons(copy);
+  };
+
+  const deleteProduct = (_id) => {
+    service.deleteProductById(_id);
+    setAllProducts(allProducts.filter((p) => p._id !== _id));
   };
 
   return (
@@ -108,7 +151,17 @@ function Admin() {
 
           <ul className="prod-list">
             {allProducts.map((prod) => (
-              <li key={prod.title}></li>
+              <li className="item" key={prod.title}>
+                <span>
+                  {prod.title} ${prod.price.toFixed(2)}
+                </span>
+                <button
+                  onClick={() => deleteProduct(prod._id)}
+                  className="btn btn-dark"
+                >
+                  Delete
+                </button>
+              </li>
             ))}
           </ul>
         </section>
@@ -121,7 +174,7 @@ function Admin() {
             <input
               type="text"
               name="code"
-              onBlur={handleProductText}
+              onBlur={handleCouponText}
               classname="form-control"
             />
           </div>
@@ -131,7 +184,7 @@ function Admin() {
             <input
               type="number"
               name="discount"
-              onBlur={handleProductText}
+              onBlur={handleCouponText}
               classname="form-control"
             />
           </div>
@@ -144,8 +197,16 @@ function Admin() {
 
           <ul className="coupon-list">
             {allCoupons.map((c) => (
-              <li key={c.code}>
-                {c.code} - {c.discount}
+              <li className="item" key={c.code}>
+                <span>
+                  {c.code} - {c.discount}
+                </span>
+                <button
+                  onClick={() => deleteCoupon(c.code)}
+                  className="btn btn-sm btn-outline-danger"
+                >
+                  Delete
+                </button>
               </li>
             ))}
           </ul>

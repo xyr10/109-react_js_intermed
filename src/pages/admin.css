@@ -1,6 +1,103 @@
 
-.admin {
+.page.admin {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+
+  section {
+    margin-bottom: 50px;
+  }
+  
+  .admin .item {
+    display: flex;
+  }
+
+  .admin .item span {
+    flex: 1;
+  }
+
+  .admin .item button {
+    align-self: flex-end;
+    justify-self: end;
+  }
+  
+  .form-label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+  
+
+  .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+
+  .btn-dark {
+    background-color: #343a40;
+    color: #fff;
+  }
+  
+
+  .prod-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .prod-list li {
+    background-color: darkgray;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  .coupon-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .coupon-list li {
+    background-color: greenyellow;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  /* Style for the delete button */
+  .btn-danger {
+    background-color: red;
+    color: #fff;
+  }
+  
+
+/* .admin {
     padding-top: 20px;
+    background-color: lightblue;
 }
 
 .admin .parent {
@@ -28,6 +125,7 @@
 .admin section h4 {
     text-align: center;
     font-family:'Times New Roman', Times, serif;
+    text-color: black;
 } {
     min-height: calc(100vh - 135px);
-}
+} */

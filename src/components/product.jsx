@@ -43,35 +43,35 @@ function Product(props) {
     } else {
       globalDelete({ ...props.data, quantity: quantity });
     }
-
-    return (
-      <div className="product">
-        <img src={"/images/" + props.data.image} alt="" />
-
-        <h5>{props.data.title}</h5>
-
-        <div className="prices">
-          <label>
-            Total <span className="total">${props.data.price * quantity}</span>
-            {/* remove the "toFixed" because it will parse it out */}
-          </label>
-          <label>
-            Price <span className="price">${props.data.price.toFixed(2)}</span>
-          </label>
-        </div>
-
-        <div className="controls">
-          <QuantityPicker onQuantityChange={handleQuantity} />
-          <button onclick="handleAdd" classname="btn btn-sm btn-success">
-            Add
-          </button>
-          <button onclick="handleDelete" classname="btn btn-sm btn-fail">
-            Delete
-          </button>
-        </div>
-      </div>
-    );
   }
+
+  return (
+    <div className="product">
+      <img src={"/images/" + props.data.image} alt="" />
+
+      <h5>{props.data.title}</h5>
+
+      <div className="prices">
+        <label>
+          Total <span className="total">${props.data.price * quantity}</span>
+          {/* remove the "toFixed" because it will parse it out */}
+        </label>
+        <label>
+          Price <span className="price">${props.data.price.toFixed(2)}</span>
+        </label>
+      </div>
+
+      <div className="controls">
+        <QuantityPicker onQuantityChange={handleQuantity} />
+        <button onClick={handleAdd} className="btn btn-sm btn-success">
+          Add
+        </button>
+        <button onClick={handleDelete} className="btn btn-sm btn-fail">
+          Delete
+        </button>
+      </div>
+    </div>
+  );
 }
 
 export default Product;

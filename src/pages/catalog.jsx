@@ -14,16 +14,17 @@ const Catalog = () => {
     // console.log("catalog loaded");
     loadCatalog();
   }, []);
-  function loadCatalog() {
+  async function loadCatalog() {
     //get the product from the service
     let service = new DataService();
-    let prods = service.getProducts();
+
+    let prods = await service.getProducts();
     console.log(prods);
     setProducts(prods);
-
-    let cats = ["Hi-top", "Mid-top", "Low-top"];
-    setCategory(cats);
     setprodsToDisplay(prods);
+
+    let cats = await service.getCategories();
+    setCategory(cats);
   }
 
   //below h5, create a button when clicked, call a test function with console.log message
@@ -47,7 +48,7 @@ const Catalog = () => {
   return (
     <div className="page catalog">
       <h2>Check out our amazing "kicks" catalog!</h2>
-      <h5>We have {products.length} products !</h5>
+      <h5>We have {prodsToDisplay.length} products !</h5>
       {category.map((c) => (
         <button
           key={c}
@@ -61,7 +62,6 @@ const Catalog = () => {
       {prodsToDisplay.map((p) => (
         <Product key={p._id} data={p} /> //you don't have to call it data, you set the prop name
       ))}
-      ;
     </div>
   );
 };
